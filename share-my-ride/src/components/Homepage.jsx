@@ -1,32 +1,39 @@
+import { Link } from 'react-router-dom';
+import { useTheme } from '../context/ThemeContext';
+
 export default function Homepage() {
+  const { dark, toggle } = useTheme();
   return (
-    <div className="bg-background-light font-display text-slate-900 min-h-screen">
+    <div className="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
       {/* ─────────── HEADER ─────────── */}
-      <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 px-6 md:px-20 py-4 bg-background-light/80 backdrop-blur-md sticky top-0 z-50">
+      <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-700 px-6 md:px-20 py-4 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
         <div className="flex items-center gap-3 text-primary">
           <div className="w-8 h-8 flex items-center justify-center bg-primary rounded-lg text-white">
             <span className="material-symbols-outlined">directions_car</span>
           </div>
-          <h2 className="text-slate-900 text-xl font-bold leading-tight tracking-tight">ShareMyRide</h2>
+          <h2 className="text-slate-900 dark:text-white text-xl font-bold leading-tight tracking-tight">ShareMyRide</h2>
         </div>
 
         <div className="hidden md:flex flex-1 justify-end gap-8 items-center">
           <nav className="flex items-center gap-8">
-            <a className="text-slate-600 hover:text-primary text-sm font-medium transition-colors" href="#how-it-works">How it Works</a>
-            <a className="text-slate-600 hover:text-primary text-sm font-medium transition-colors" href="#benefits">Benefits</a>
-            <a className="text-slate-600 hover:text-primary text-sm font-medium transition-colors" href="#safety">Safety</a>
+            <a className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#how-it-works">How it Works</a>
+            <a className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#benefits">Benefits</a>
+            <a className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#safety">Safety</a>
           </nav>
-          <div className="flex gap-3">
-            <button className="flex min-w-[84px] cursor-pointer items-center justify-center rounded-xl h-10 px-5 bg-primary/10 text-primary hover:bg-primary/20 text-sm font-bold transition-all">
+          <div className="flex gap-3 items-center">
+            <Link to="/login" className="flex min-w-[84px] cursor-pointer items-center justify-center rounded-xl h-10 px-5 bg-primary/10 dark:bg-primary/20 text-primary hover:bg-primary/20 dark:hover:bg-primary/30 text-sm font-bold transition-all">
               Log In
-            </button>
-            <button className="flex min-w-[84px] cursor-pointer items-center justify-center rounded-xl h-10 px-5 bg-primary text-white hover:bg-primary/90 text-sm font-bold shadow-lg shadow-primary/20 transition-all">
+            </Link>
+            <Link to="/login" className="flex min-w-[84px] cursor-pointer items-center justify-center rounded-xl h-10 px-5 bg-primary text-white hover:bg-primary/90 text-sm font-bold shadow-lg shadow-primary/20 transition-all">
               Sign Up
+            </Link>
+            <button onClick={toggle} className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition-colors" title="Toggle theme">
+              <span className="material-symbols-outlined">{dark ? 'light_mode' : 'dark_mode'}</span>
             </button>
           </div>
         </div>
 
-        <button className="md:hidden text-slate-900">
+        <button className="md:hidden text-slate-900 dark:text-white">
           <span className="material-symbols-outlined">menu</span>
         </button>
       </header>
@@ -38,20 +45,20 @@ export default function Homepage() {
             {/* Left Content */}
             <div className="flex flex-col gap-8 order-2 lg:order-1">
               <div className="flex flex-col gap-4">
-                <span className="inline-block px-4 py-1 rounded-full bg-secondary/10 text-secondary text-sm font-bold w-fit">
+                <span className="inline-block px-4 py-1 rounded-full bg-secondary/10 dark:bg-secondary/20 text-secondary dark:text-secondary-light text-sm font-bold w-fit">
                   Now at 50+ Campuses
                 </span>
-                <h1 className="text-slate-900 text-5xl md:text-6xl font-black leading-[1.1] tracking-tight">
+                <h1 className="text-slate-900 dark:text-white text-5xl md:text-6xl font-black leading-[1.1] tracking-tight">
                   Connecting Campuses, <br />
                   <span className="text-primary">One Ride at a Time</span>
                 </h1>
-                <p className="text-slate-600 text-lg md:text-xl font-normal max-w-lg">
+                <p className="text-slate-600 dark:text-slate-300 text-lg md:text-xl font-normal max-w-lg">
                   The safest and most affordable way for students to travel. Share costs, meet peers, and reduce your carbon footprint.
                 </p>
               </div>
 
               {/* Search Card */}
-              <div className="bg-white p-6 rounded-2xl shadow-xl border border-slate-100 flex flex-col gap-4">
+              <div className="bg-white dark:bg-surface-dark p-6 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800 flex flex-col gap-4">
                 <h3 className="text-lg font-bold">Find a Ride</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="flex flex-col gap-1.5">
@@ -59,7 +66,7 @@ export default function Homepage() {
                     <div className="relative">
                       <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">location_on</span>
                       <input
-                        className="w-full pl-10 pr-4 py-3 rounded-xl border-slate-200 bg-slate-50 focus:ring-primary focus:border-primary text-sm"
+                        className="w-full pl-10 pr-4 py-3 rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-primary focus:border-primary text-sm text-slate-900 dark:text-white"
                         placeholder="Campus/City"
                         type="text"
                       />
@@ -70,7 +77,7 @@ export default function Homepage() {
                     <div className="relative">
                       <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">near_me</span>
                       <input
-                        className="w-full pl-10 pr-4 py-3 rounded-xl border-slate-200 bg-slate-50 focus:ring-primary focus:border-primary text-sm"
+                        className="w-full pl-10 pr-4 py-3 rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-primary focus:border-primary text-sm text-slate-900 dark:text-white"
                         placeholder="Destination"
                         type="text"
                       />
@@ -81,7 +88,7 @@ export default function Homepage() {
                     <div className="relative">
                       <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">calendar_today</span>
                       <input
-                        className="w-full pl-10 pr-4 py-3 rounded-xl border-slate-200 bg-slate-50 focus:ring-primary focus:border-primary text-sm"
+                        className="w-full pl-10 pr-4 py-3 rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-primary focus:border-primary text-sm text-slate-900 dark:text-white"
                         type="date"
                       />
                     </div>
@@ -106,7 +113,7 @@ export default function Homepage() {
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZTJamyQKA3UscxNE_uK2rIdexmfehwlo3RIdrzAOaFwb06su43nJBGnoYw21cxhluVkDR-ofaRWskgeGLNbWfmgdRhhCB6jSOTgBTPurO724gUNb4CzRSPrJfAx3Q1mdxm8ZN3CPhe083MUa9us9EHfTeg0G6NkQcJpaZ1i0hJRk9wBO_K3ATSJOFNRQjcqDZQJF0-E_cuwa8-z02XYtbOwZ2ySUEyHBRUjCS4I7mlHSHb25Rk7l-y66l5uIKPMYNhDgqtqq6WnKm"
                   />
                   {/* Floating badge */}
-                  <div className="absolute bottom-6 right-6 bg-white/90 backdrop-blur p-4 rounded-xl shadow-lg border border-white/20">
+                  <div className="absolute bottom-6 right-6 bg-white/90 dark:bg-surface-dark/90 backdrop-blur p-4 rounded-xl shadow-lg border border-white/20 dark:border-slate-700/50">
                     <div className="flex items-center gap-3">
                       <div className="flex -space-x-3">
                         <div className="w-8 h-8 rounded-full border-2 border-white bg-slate-200 overflow-hidden">
@@ -119,7 +126,7 @@ export default function Homepage() {
                           <img alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmP2Ddyys5JUWeEqYaGdVnHaZ0c0DqN2Il7wJZn31gPtjg3Ii8-fD3zRFg5uiNFbefU7w6qs9vBZ-ZDsRoJFtm_CwjwGdCRgdvXWNoL7eXxJkVi3_R32ij4dVH6UokmoZRVXKCTiActoKSqsq4wxvPCfUKEQYv4Xwdpi5bCIC7N1L5P-7drGhe8dM2xk_W1r-QAr3VziWXTE9ZciH1K0_xepCE5reqK8WjqL7cmLM9kcg_G1HV0dncql9g8XN6QVmVlai8pdO4OQDw" />
                         </div>
                       </div>
-                      <p className="text-xs font-bold">+1.2k Students riding today</p>
+                      <p className="text-xs font-bold text-slate-900 dark:text-white">+1.2k Students riding today</p>
                     </div>
                   </div>
                 </div>
@@ -129,33 +136,33 @@ export default function Homepage() {
         </section>
 
         {/* ─────────── HOW IT WORKS ─────────── */}
-        <section className="py-20 bg-white" id="how-it-works">
+        <section className="py-20 bg-white dark:bg-surface-dark" id="how-it-works">
           <div className="px-6 md:px-20 max-w-7xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-black mb-4">How it Works</h2>
-              <p className="text-slate-600">Your journey starts here in three simple steps</p>
+              <p className="text-slate-600 dark:text-slate-400">Your journey starts here in three simple steps</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
               <div className="flex flex-col items-center text-center gap-4">
-                <div className="w-16 h-16 rounded-full bg-primary/10 text-primary flex items-center justify-center mb-2">
+                <div className="w-16 h-16 rounded-full bg-primary/10 dark:bg-primary/20 text-primary flex items-center justify-center mb-2">
                   <span className="material-symbols-outlined text-3xl">search</span>
                 </div>
                 <h3 className="text-xl font-bold">1. Find or Offer</h3>
-                <p className="text-slate-600">Search for a ride to your destination or list your car to share the journey.</p>
+                <p className="text-slate-600 dark:text-slate-400">Search for a ride to your destination or list your car to share the journey.</p>
               </div>
               <div className="flex flex-col items-center text-center gap-4">
-                <div className="w-16 h-16 rounded-full bg-secondary/10 text-secondary flex items-center justify-center mb-2">
+                <div className="w-16 h-16 rounded-full bg-secondary/10 dark:bg-secondary/20 text-secondary dark:text-secondary-light flex items-center justify-center mb-2">
                   <span className="material-symbols-outlined text-3xl">chat_bubble</span>
                 </div>
                 <h3 className="text-xl font-bold">2. Connect</h3>
-                <p className="text-slate-600">Chat with verified students, confirm details, and agree on a pickup point.</p>
+                <p className="text-slate-600 dark:text-slate-400">Chat with verified students, confirm details, and agree on a pickup point.</p>
               </div>
               <div className="flex flex-col items-center text-center gap-4">
-                <div className="w-16 h-16 rounded-full bg-green-100 text-green-600 flex items-center justify-center mb-2">
+                <div className="w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 flex items-center justify-center mb-2">
                   <span className="material-symbols-outlined text-3xl">payments</span>
                 </div>
                 <h3 className="text-xl font-bold">3. Ride &amp; Save</h3>
-                <p className="text-slate-600">Split fuel costs easily. Rides start as low as ₹50 per journey!</p>
+                <p className="text-slate-600 dark:text-slate-400">Split fuel costs easily. Rides start as low as ₹50 per journey!</p>
               </div>
             </div>
           </div>
@@ -197,29 +204,29 @@ export default function Homepage() {
                     </div>
                     <div>
                       <h4 className="font-bold text-lg mb-1">Campus Verified</h4>
-                      <p className="text-slate-600 text-sm">Every user is verified using their university email ID for maximum safety.</p>
+                      <p className="text-slate-600 dark:text-slate-400 text-sm">Every user is verified using their university email ID for maximum safety.</p>
                     </div>
                   </div>
                   <div className="flex gap-4">
-                    <div className="shrink-0 w-8 h-8 rounded-full bg-secondary/20 text-secondary flex items-center justify-center">
+                    <div className="shrink-0 w-8 h-8 rounded-full bg-secondary/20 text-secondary dark:text-secondary-light flex items-center justify-center">
                       <span className="material-symbols-outlined text-xl">savings</span>
                     </div>
                     <div>
                       <h4 className="font-bold text-lg mb-1">Save Money</h4>
-                      <p className="text-slate-600 text-sm">Save up to 80% on travel costs compared to traditional taxis or bus rides.</p>
+                      <p className="text-slate-600 dark:text-slate-400 text-sm">Save up to 80% on travel costs compared to traditional taxis or bus rides.</p>
                     </div>
                   </div>
                   <div className="flex gap-4">
-                    <div className="shrink-0 w-8 h-8 rounded-full bg-green-100 text-green-600 flex items-center justify-center">
+                    <div className="shrink-0 w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 flex items-center justify-center">
                       <span className="material-symbols-outlined text-xl">eco</span>
                     </div>
                     <div>
                       <h4 className="font-bold text-lg mb-1">Eco Friendly</h4>
-                      <p className="text-slate-600 text-sm">Reduce your carbon footprint by filling empty seats and cutting campus traffic.</p>
+                      <p className="text-slate-600 dark:text-slate-400 text-sm">Reduce your carbon footprint by filling empty seats and cutting campus traffic.</p>
                     </div>
                   </div>
                 </div>
-                <button className="w-fit bg-secondary text-white px-8 py-3 rounded-xl font-bold hover:bg-secondary/90 transition-all cursor-pointer">
+                <button className="w-fit bg-secondary text-white px-8 py-3 rounded-xl font-bold hover:bg-secondary/90 shadow-lg shadow-secondary/20 transition-all cursor-pointer">
                   Join the Community
                 </button>
               </div>
@@ -228,16 +235,16 @@ export default function Homepage() {
         </section>
 
         {/* ─────────── CTA SECTION ─────────── */}
-        <section className="py-20 bg-primary/5">
+        <section className="py-20 bg-primary/5 dark:bg-primary/10">
           <div className="px-6 md:px-20 max-w-7xl mx-auto text-center">
             <div className="max-w-2xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-black mb-6">Ready to start saving on your daily commute?</h2>
-              <p className="text-slate-600 mb-10 text-lg">Join thousands of students who are already sharing rides and making campus travel smarter.</p>
+              <p className="text-slate-600 dark:text-slate-400 mb-10 text-lg">Join thousands of students who are already sharing rides and making campus travel smarter.</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button className="bg-primary text-white px-10 py-4 rounded-xl font-bold text-lg shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform cursor-pointer">
                   Download for iOS
                 </button>
-                <button className="bg-slate-900 text-white px-10 py-4 rounded-xl font-bold text-lg hover:scale-[1.02] transition-transform cursor-pointer">
+                <button className="bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 px-10 py-4 rounded-xl font-bold text-lg shadow-xl shadow-slate-900/20 dark:shadow-white/10 hover:scale-[1.02] transition-transform cursor-pointer">
                   Download for Android
                 </button>
               </div>
@@ -247,7 +254,7 @@ export default function Homepage() {
       </main>
 
       {/* ─────────── FOOTER ─────────── */}
-      <footer className="bg-white border-t border-slate-200 py-12">
+      <footer className="bg-white dark:bg-surface-dark border-t border-slate-200 dark:border-slate-700 py-12">
         <div className="px-6 md:px-20 max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="col-span-2 md:col-span-1">
@@ -255,7 +262,7 @@ export default function Homepage() {
                 <div className="w-6 h-6 flex items-center justify-center bg-primary rounded text-white">
                   <span className="material-symbols-outlined text-sm">directions_car</span>
                 </div>
-                <h2 className="text-slate-900 text-lg font-bold">ShareMyRide</h2>
+                <h2 className="text-slate-900 dark:text-white text-lg font-bold">ShareMyRide</h2>
               </div>
               <p className="text-slate-500 text-sm leading-relaxed">Making campus travel smarter, safer, and more affordable for students across India.</p>
             </div>
